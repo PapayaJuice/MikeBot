@@ -13,7 +13,6 @@ import (
 
 var (
 	debug = flag.Bool("debug", false, "Turn on debug logging")
-	name  = flag.String("name", "MikeBot", "Name for discord bot")
 	token = flag.String("token", "", "Token for discord bot")
 )
 
@@ -28,7 +27,7 @@ func init() {
 func main() {
 	flag.Parse()
 
-	bot, err := discordgo.New(fmt.Sprintf("%s %s", *name, *token))
+	bot, err := discordgo.New(fmt.Sprintf("Bot %s", *token))
 	if err != nil {
 		log.Fatalf("Error initiating bot: %v\n", err)
 	}
