@@ -30,7 +30,7 @@ func routeInbound(session *discordgo.Session, message *discordgo.MessageCreate) 
 	var err error
 	switch command {
 	case "!coinflip":
-		response = roll.CoinFlip(seed)
+		response = roll.CoinFlip(seed, message)
 	case "!love":
 		response = speak.Love(body, message)
 	case "!roll":
