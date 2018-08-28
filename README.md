@@ -9,11 +9,11 @@ A general Discord bot for my server
 
 ## Commands
 
-### !slap
-Slaps a user
+### !love
+Holds a user and let's them know everything is right in the world
 
 ```bash
-> !slap Yoshi
+> !love Yoshi
 $ Mike holds Yoshi closely and kisses their cheek.
 ```
 
