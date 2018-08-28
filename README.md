@@ -9,6 +9,14 @@ A general Discord bot for my server
 
 ## Commands
 
+### !slap
+Slaps a user
+
+```bash
+> !slap Yoshi
+$ Mike holds Yoshi closely and kisses their cheek.
+```
+
 ### !roll
 Rolls a dice, IN PROGRESS
 
@@ -22,5 +30,5 @@ Slaps a user
 
 ```bash
 > !slap a large lad
-$ Mike slaps a large lad with a big fish.
+$ Mike slaps a large lad around with a large trout.
 ```
