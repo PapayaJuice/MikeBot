@@ -1,4 +1,4 @@
-package slap
+package speak
 
 import (
 	"testing"
@@ -20,5 +20,10 @@ var (
 
 func TestSlap(t *testing.T) {
 	resp := Slap("himself", &message)
-	assert.Equal(t, "KimChiPls slaps himself with a big fish.", resp)
+	assert.Equal(t, "KimChiPls slaps himself around with a large trout.", resp)
+}
+
+func TestLove(t *testing.T) {
+	resp := Love("himself", &message)
+	assert.Equal(t, "KimChiPls holds himself closely and kisses their cheek.", resp)
 }

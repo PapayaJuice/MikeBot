@@ -4,7 +4,7 @@ A general Discord bot for my server
 ## Deploy
 ```bash
 > cd cmd/mikebot && go build
-> ./mikebot token=<token here>
+> ./mikebot -token <token here>
 ```
 
 ## Commands

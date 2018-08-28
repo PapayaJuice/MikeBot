@@ -4,7 +4,7 @@ import (
 	"strings"
 
 	"github.com/PapayaJuice/mikebot/pkg/roll"
-	"github.com/PapayaJuice/mikebot/pkg/slap"
+	"github.com/PapayaJuice/mikebot/pkg/speak"
 	"github.com/bwmarrin/discordgo"
 	log "github.com/sirupsen/logrus"
 )
@@ -25,10 +25,14 @@ func routeInbound(session *discordgo.Session, message *discordgo.MessageCreate) 
 	var response string
 	var err error
 	switch command {
-	case "!slap":
-		response = slap.Slap(body, message)
+	case "!love":
+		response = speak.Love(body, message)
+		err = session.ChannelMessageDelete(message.ChannelID, message.ID)
 	case "!roll":
 		response, err = roll.Roll(body, message)
+	case "!slap":
+		response = speak.Slap(body, message)
+		err = session.ChannelMessageDelete(message.ChannelID, message.ID)
 	default:
 		log.Warnf("Unknown command %s\n", command)
 		return
