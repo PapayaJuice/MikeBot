@@ -1,4 +1,4 @@
-# MikeBot
+# MikeBot [![Build Status](https://travis-ci.org/PapayaJuice/mikebot.svg?branch=master)](https://travis-ci.org/PapayaJuice/mikebot)
 A general Discord bot for my server
 
 ## Deploy
