@@ -9,6 +9,14 @@ A general Discord bot for my server
 
 ## Commands
 
+### !coinflip
+Flips a coin and reveals the result.
+```bash
+> !coinflip
+$ MikeBot flips a coin...
+$ It's heads!
+```
+
 ### !love
 Holds a user and let's them know everything is right in the world
 

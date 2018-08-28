@@ -2,6 +2,7 @@ package main
 
 import (
 	"strings"
+	"time"
 
 	"github.com/PapayaJuice/mikebot/pkg/roll"
 	"github.com/PapayaJuice/mikebot/pkg/speak"
@@ -18,6 +19,9 @@ func routeInbound(session *discordgo.Session, message *discordgo.MessageCreate) 
 		return
 	}
 
+	// Seed for commands which need one
+	seed := time.Now().UnixNano()
+
 	parts := strings.Split(message.Content, " ")
 	command := parts[0]
 	body := strings.Join(parts[1:], " ")
@@ -25,27 +29,33 @@ func routeInbound(session *discordgo.Session, message *discordgo.MessageCreate) 
 	var response string
 	var err error
 	switch command {
+	case "!coinflip":
+		response = roll.CoinFlip(seed)
 	case "!love":
 		response = speak.Love(body, message)
-		err = session.ChannelMessageDelete(message.ChannelID, message.ID)
 	case "!roll":
-		response, err = roll.Roll(body, message)
+		response, err = roll.Dice(body, message)
 	case "!slap":
 		response = speak.Slap(body, message)
-		err = session.ChannelMessageDelete(message.ChannelID, message.ID)
 	default:
 		log.Warnf("Unknown command %s\n", command)
 		return
 	}
-
 	if err != nil {
 		log.Errorf("Error performing %s: %v\n", command, err)
 		return
 	}
 
-	_, err = session.ChannelMessageSend(message.ChannelID, response)
+	err = session.ChannelMessageDelete(message.ChannelID, message.ID)
 	if err != nil {
-		log.Errorf("Error sending message: %v\n", err)
+		log.Errorf("Error deleting message: %v\n", err)
+	}
+
+	if response != "" {
+		_, err = session.ChannelMessageSend(message.ChannelID, response)
+		if err != nil {
+			log.Errorf("Error sending message: %v\n", err)
+		}
 	}
 
 	return
