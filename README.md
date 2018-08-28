@@ -13,8 +13,7 @@ A general Discord bot for my server
 Flips a coin and reveals the result.
 ```bash
 > !coinflip
-$ MikeBot flips a coin...
-$ It's heads!
+$ MikeBot flips a coin... It's heads!
 ```
 
 ### !love
