@@ -8,14 +8,14 @@ import (
 )
 
 // CoinFlip tosses a coin in the air and returns the result.
-func CoinFlip(seed int64) string {
+func CoinFlip(seed int64, message *discordgo.MessageCreate) string {
 	states := []string{
 		"heads",
 		"tails",
 	}
 	rand.Seed(seed)
 
-	return fmt.Sprintf("Flips a coin... It's %s!", states[rand.Intn(len(states))])
+	return fmt.Sprintf("%s flips a coin... It's %s!", message.Author.Username, states[rand.Intn(len(states))])
 }
 
 // Dice rolls a dice with modifiers and returns the result.

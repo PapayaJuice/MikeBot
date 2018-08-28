@@ -19,6 +19,6 @@ var (
 )
 
 func TestCoinFlip(t *testing.T) {
-	resp := CoinFlip(int64(0))
-	assert.Equal(t, "Flips a coin... It's heads!", resp)
+	resp := CoinFlip(int64(0), &message)
+	assert.Equal(t, "KimChiPls flips a coin... It's heads!", resp)
 }
