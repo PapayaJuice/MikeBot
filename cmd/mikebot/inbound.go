@@ -4,10 +4,12 @@ import (
 	"strings"
 	"time"
 
-	"github.com/PapayaJuice/mikebot/pkg/roll"
-	"github.com/PapayaJuice/mikebot/pkg/speak"
 	"github.com/bwmarrin/discordgo"
 	log "github.com/sirupsen/logrus"
+
+	"github.com/papayajuice/mikebot/pkg/roll"
+	"github.com/papayajuice/mikebot/pkg/speak"
+	"github.com/papayajuice/mikebot/pkg/tcg"
 )
 
 func routeInbound(session *discordgo.Session, message *discordgo.MessageCreate) {
@@ -26,8 +28,19 @@ func routeInbound(session *discordgo.Session, message *discordgo.MessageCreate) 
 	command := parts[0]
 	body := strings.Join(parts[1:], " ")
 
+	// Split for tcg player
+	// TODO: Clean this entire function it's so gross
+	var tcgCard string
+	tcgP := strings.Split(message.Content, "[[")
+	if len(tcgP) == 2 {
+		tcgP = strings.Split(tcgP[1], "]]")
+		tcgCard = tcgP[0]
+	}
+
 	var response string
 	var err error
+	var tcgResp string
+	var tcgImg string
 	switch command {
 	case "!coinflip":
 		response = roll.CoinFlip(seed, message)
@@ -38,11 +51,31 @@ func routeInbound(session *discordgo.Session, message *discordgo.MessageCreate) 
 	case "!slap":
 		response = speak.Slap(body, message)
 	default:
-		log.Warnf("Unknown command %s\n", command)
-		return
+		if strings.HasPrefix(command, "![[") && tcgCard != "" {
+			tcgResp, tcgImg, err = tcg.SearchTCG(tcgCard)
+		} else {
+			log.Warnf("Unknown command %s\n", command)
+			return
+		}
 	}
 	if err != nil {
 		log.Errorf("Error performing %s: %v\n", command, err)
+		return
+	}
+
+	if tcgResp != "" {
+		msg := discordgo.MessageSend{
+			Content: tcgResp,
+			Embed: discordgo.MessageEmbed{
+				Image: discordgo.MessageEmbedImage{
+					URL: tcgImg,
+				}
+			}
+		}
+		_, err = session.ChannelMessageSendComplex(message.ChannelID, msg)
+		if err != nil {
+			log.Errorf("Error sending message: %v\n", err)
+		}
 		return
 	}
 

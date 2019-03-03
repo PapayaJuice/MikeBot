@@ -9,6 +9,8 @@ import (
 
 	"github.com/bwmarrin/discordgo"
 	log "github.com/sirupsen/logrus"
+
+	"github.com/papayajuice/mikebot/pkg/tcg"
 )
 
 var (
@@ -26,6 +28,9 @@ func init() {
 
 func main() {
 	flag.Parse()
+
+	// Start refresh service for tcgplayer API
+	go tcg.TokenRefresh()
 
 	bot, err := discordgo.New(fmt.Sprintf("Bot %s", *token))
 	if err != nil {
