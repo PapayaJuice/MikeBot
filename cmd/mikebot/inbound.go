@@ -7,9 +7,9 @@ import (
 	"github.com/bwmarrin/discordgo"
 	log "github.com/sirupsen/logrus"
 
-	"github.com/papayajuice/mikebot/pkg/roll"
-	"github.com/papayajuice/mikebot/pkg/speak"
-	"github.com/papayajuice/mikebot/pkg/tcg"
+	"github.com/PapayaJuice/mikebot/pkg/roll"
+	"github.com/PapayaJuice/mikebot/pkg/speak"
+	"github.com/PapayaJuice/mikebot/pkg/tcg"
 )
 
 func routeInbound(session *discordgo.Session, message *discordgo.MessageCreate) {
@@ -66,13 +66,13 @@ func routeInbound(session *discordgo.Session, message *discordgo.MessageCreate) 
 	if tcgResp != "" {
 		msg := discordgo.MessageSend{
 			Content: tcgResp,
-			Embed: discordgo.MessageEmbed{
-				Image: discordgo.MessageEmbedImage{
+			Embed: &discordgo.MessageEmbed{
+				Image: &discordgo.MessageEmbedImage{
 					URL: tcgImg,
-				}
-			}
+				},
+			},
 		}
-		_, err = session.ChannelMessageSendComplex(message.ChannelID, msg)
+		_, err = session.ChannelMessageSendComplex(message.ChannelID, &msg)
 		if err != nil {
 			log.Errorf("Error sending message: %v\n", err)
 		}

@@ -10,7 +10,7 @@ import (
 	"github.com/bwmarrin/discordgo"
 	log "github.com/sirupsen/logrus"
 
-	"github.com/papayajuice/mikebot/pkg/tcg"
+	"github.com/PapayaJuice/mikebot/pkg/tcg"
 )
 
 var (
