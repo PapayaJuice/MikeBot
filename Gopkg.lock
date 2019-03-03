@@ -20,6 +20,12 @@
   version = "v1.3.0"
 
 [[projects]]
+  branch = "master"
+  name = "github.com/jarcoal/httpmock"
+  packages = ["."]
+  revision = "53def6cd0f87425f5425d4f0f27f66f048759b94"
+
+[[projects]]
   name = "github.com/pmezard/go-difflib"
   packages = ["difflib"]
   revision = "792786c7400a136282c1664665ae0a8db921c6c2"
@@ -33,7 +39,11 @@
 
 [[projects]]
   name = "github.com/stretchr/testify"
-  packages = ["assert"]
+  packages = [
+    "assert",
+    "require",
+    "suite"
+  ]
   revision = "f35b8ab0b5a2cef36673838d662e249dd9c94686"
   version = "v1.2.2"
 
@@ -61,6 +71,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "92877a4a8335d7f248d278f479eaefb5b8aa238396468702d072b325dbf734a2"
+  inputs-digest = "ecba6659c410d5c5af679002c5c2c6d91b4dbd743a40b5831c686d82b6abd2c8"
   solver-name = "gps-cdcl"
   solver-version = 1
