@@ -8,6 +8,8 @@ import (
 	"io/ioutil"
 	"net/http"
 	"time"
+
+	log "github.com/sirupsen/logrus"
 )
 
 const (
@@ -42,6 +44,7 @@ func TokenRefresh() {
 		t, err := requestToken()
 		if err != nil || currToken == nil {
 			checkTime = 1
+			log.Errorf("error requesting token: %v", err)
 			continue
 		}
 		currToken = t
