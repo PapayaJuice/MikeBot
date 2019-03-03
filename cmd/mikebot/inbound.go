@@ -54,12 +54,12 @@ func routeInbound(session *discordgo.Session, message *discordgo.MessageCreate) 
 		if strings.HasPrefix(command, "![[") && tcgCard != "" {
 			tcgResp, tcgImg, err = tcg.SearchTCG(tcgCard)
 		} else {
-			log.Warnf("Unknown command %s\n", command)
+			log.Warnf("Unknown command %s", command)
 			return
 		}
 	}
 	if err != nil {
-		log.Errorf("Error performing %s: %v\n", command, err)
+		log.Errorf("Error performing %s: %v", command, err)
 		if strings.Contains(err.Error(), "No products") {
 			session.ChannelMessageSend(message.ChannelID, err.Error())
 		}
@@ -77,20 +77,20 @@ func routeInbound(session *discordgo.Session, message *discordgo.MessageCreate) 
 		}
 		_, err = session.ChannelMessageSendComplex(message.ChannelID, &msg)
 		if err != nil {
-			log.Errorf("Error sending message: %v\n", err)
+			log.Errorf("Error sending message: %v", err)
 		}
 		return
 	}
 
 	err = session.ChannelMessageDelete(message.ChannelID, message.ID)
 	if err != nil {
-		log.Errorf("Error deleting message: %v\n", err)
+		log.Errorf("Error deleting message: %v", err)
 	}
 
 	if response != "" {
 		_, err = session.ChannelMessageSend(message.ChannelID, response)
 		if err != nil {
-			log.Errorf("Error sending message: %v\n", err)
+			log.Errorf("Error sending message: %v", err)
 		}
 	}
 
