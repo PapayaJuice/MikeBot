@@ -60,6 +60,9 @@ func routeInbound(session *discordgo.Session, message *discordgo.MessageCreate) 
 	}
 	if err != nil {
 		log.Errorf("Error performing %s: %v\n", command, err)
+		if strings.Contains(err.Error(), "No products") {
+			session.ChannelMessageSend(message.ChannelID, err.Error())
+		}
 		return
 	}
 

@@ -87,7 +87,10 @@ func searchCard(card string) (int, error) {
 	uri := fmt.Sprintf(mtgSearchURI, uCard)
 
 	res, err := queryAndParse(uri)
-	return res.ProductID, err
+	if err != nil {
+		return 0, err
+	}
+	return res.ProductID, nil
 }
 
 func requestCard(cardID int) (*ProductResult, error) {
