@@ -32,6 +32,6 @@ func TestTCGTestSuite(t *testing.T) {
 func (s *TCGTestSuite) TestSearchTCG() {
 	r := s.Require()
 
-	_, _, err := SearchTCG("black cat")
+	_, _, err := searchTCG("black cat")
 	r.NoError(err)
 }
