@@ -10,6 +10,8 @@ import (
 	"github.com/bwmarrin/discordgo"
 	log "github.com/sirupsen/logrus"
 
+	"github.com/PapayaJuice/mikebot/pkg/roll"
+	"github.com/PapayaJuice/mikebot/pkg/speak"
 	"github.com/PapayaJuice/mikebot/pkg/tcg"
 )
 
@@ -37,7 +39,9 @@ func main() {
 		log.Fatalf("Error initiating bot: %v\n", err)
 	}
 
-	bot.AddHandler(routeInbound)
+	bot.AddHandler(roll.Inbound)
+	bot.AddHandler(speak.Inbound)
+	bot.AddHandler(tcg.Inbound)
 
 	err = bot.Open()
 	if err != nil {
