@@ -36,21 +36,18 @@ type BearerToken struct {
 
 // TokenRefresh attempts to request a new token if we need one
 func TokenRefresh() {
-	checkTime := 1 * time.Second
 	for {
-		ct := time.Tick(checkTime)
-		<-ct
-
 		t, err := requestToken()
 		if err != nil || currToken == nil {
-			checkTime = 1
 			log.Errorf("error requesting token: %v", err)
+			time.Sleep(10 * time.Minute)
 			continue
 		}
 		currToken = t
 
 		// Set time to request a little early so we don't lose connection
-		checkTime = time.Duration(currToken.ExpiresIn - 3600)
+		checkTime := time.Duration(currToken.ExpiresIn - 3600)
+		time.Sleep(checkTime)
 	}
 }
 
