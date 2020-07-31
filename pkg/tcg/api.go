@@ -11,8 +11,8 @@ import (
 )
 
 const (
-	mtgSearchURI = "http://api.tcgplayer.com/v1.19.0/catalog/products?categoryId=1&productName=%s"
-	mtgReqURI    = "http://api.tcgplayer.com/v1.19.0/catalog/products/%d?getExtendedFields=true"
+	mtgSearchURI = "https://api.tcgplayer.com/v1.39.0/catalog/products?categoryId=1&productName=%s"
+	mtgReqURI    = "https://api.tcgplayer.com/v1.39.0/catalog/products/%d?getExtendedFields=true"
 )
 
 var (

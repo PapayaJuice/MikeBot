@@ -47,7 +47,7 @@ func TokenRefresh() {
 
 		// Set time to request a little early so we don't lose connection
 		checkTime := time.Duration(currToken.ExpiresIn - 3600)
-		time.Sleep(checkTime)
+		time.Sleep(checkTime * time.Second)
 	}
 }
 
