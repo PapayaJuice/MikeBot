@@ -10,6 +10,7 @@ import (
 	"github.com/bwmarrin/discordgo"
 	log "github.com/sirupsen/logrus"
 
+	"github.com/PapayaJuice/mikebot/pkg/civ"
 	"github.com/PapayaJuice/mikebot/pkg/roll"
 	"github.com/PapayaJuice/mikebot/pkg/speak"
 	"github.com/PapayaJuice/mikebot/pkg/tcg"
@@ -47,6 +48,14 @@ func main() {
 	if err != nil {
 		log.Fatalf("Error opening websocket to Discord: %v\n", err)
 	}
+
+	log.Info("Starting civ webhook server")
+	go func() {
+		err := civ.ListenAndServe(bot)
+		if err != nil {
+			log.Errorf("error listening for civ webhooks: %v", err)
+		}
+	}()
 
 	log.Info("Listening for messages...")
 
