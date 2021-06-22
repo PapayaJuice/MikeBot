@@ -16,7 +16,7 @@ func Inbound(session *discordgo.Session, message *discordgo.MessageCreate) {
 	if message.Author.ID == session.State.User.ID {
 		return
 	}
-	if message.Content[0] != '!' {
+	if message.Content == "" || message.Content[0] != '!' {
 		return
 	}
 

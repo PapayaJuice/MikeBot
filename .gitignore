@@ -13,3 +13,4 @@
 
 # Binary
 cmd/mikebot/mikebot
+k8s/mikebot-deploy.yaml
